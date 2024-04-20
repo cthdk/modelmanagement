@@ -28,6 +28,8 @@ export function Manager() {
             <input placeholder="Password" autoFocus='true' />
           </div>
 
+          <button className="submit-button"> Create new Manager </button>
+
           </form>
         </div>
       </Fragment>
