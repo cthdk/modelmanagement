@@ -11,7 +11,7 @@ export function Model() {
         <form className="">
             <div className="input-div">
               <label> First Name </label>
-              <input placeholder="First name" />
+              <input placeholder="First name" autoFocus='true' />
             </div>
 
             <div className="input-div">
@@ -88,6 +88,8 @@ export function Model() {
               <label > Comments </label>
               <textarea placeholder="Comments"/>
             </div>
+
+            <button className="submit-button"> Create new model </button>
 
         </form>
         </div>

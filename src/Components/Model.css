@@ -35,3 +35,14 @@ form {
     outline: none;
     font-family: 'Arial', sans-serif;
   } 
+
+  .submit-button {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid white;
+    background-color: green;
+    color: white;
+    font-size: 14px;
+    min-width: 12rem;
+    cursor: pointer;
+  }
