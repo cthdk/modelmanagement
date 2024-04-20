@@ -1,7 +1,7 @@
 export function Login() {
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form>
             <input 
             type="text"
             placeholder="Username" />

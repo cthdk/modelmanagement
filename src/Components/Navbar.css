@@ -1,0 +1,24 @@
+.navbar {
+  display: flex;
+  vertical-align: middle;
+  margin-bottom: 0.8rem;
+  background-color: green;
+}
+
+.navbar a {
+  padding: 0.8rem;
+  vertical-align: middle;
+  color: white;
+}
+
+.navLink.active {
+  background-color: white;
+  color: green;
+  font-weight: bold;
+  border-bottom: 1.5px solid green;
+}
+
+.navLink {
+  font-size: 1.1rem;
+  text-decoration: none;
+}
