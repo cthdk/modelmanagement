@@ -10,7 +10,7 @@ import { Navbar } from './Components/Navbar';
 import { Model } from './Components/Model';
 import { Manager } from './Components/Manager';
 import { Job } from './Components/Job';
-import { Login } from '/.Components/Login';
+import { Login } from './Components/Login';
 
 function App() {
   return (
