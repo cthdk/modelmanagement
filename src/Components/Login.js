@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 
 export function Login() { 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -21,6 +23,7 @@ export function Login() {
             if (response.ok) {
                 const { jwt } = await response.json();
                 localStorage.setItem('token', jwt);
+                history.push('/create-new-model');
                 // Redirect or do something else after successful login
             } else {
                 const errorMessage = await response.text();
