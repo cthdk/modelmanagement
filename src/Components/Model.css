@@ -36,6 +36,11 @@ form {
     font-family: 'Arial', sans-serif;
   } 
 
+  .button-container { 
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .submit-button {
     padding: 10px;
     border-radius: 4px;
