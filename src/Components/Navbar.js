@@ -4,6 +4,9 @@ import './Navbar.css';
 export function Navbar() {
     return (
       <nav className="navbar">
+       <NavLink to="/homepage" className="navLink"> 
+        Homepage
+       </NavLink>
        <NavLink to="/create-new-model" className="navLink"> 
         Create new model
        </NavLink>
