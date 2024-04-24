@@ -1,8 +1,8 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import './Model.css';
 
 export function Model() {
-    
+
     return (
         <Fragment>
         <h2> Create new model </h2>
