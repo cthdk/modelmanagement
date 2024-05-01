@@ -8,14 +8,19 @@ export function Navbar() {
         Homepage
        </NavLink>
        <NavLink to="/create-new-model" className="navLink"> 
-        Create new model
+        New model
        </NavLink>
        <NavLink to="/create-new-manager" className="navLink">
-        Create new manager
+        New manager
        </NavLink>
        <NavLink to="/create-new-job" className="navLink">
-        Create new job
+        New job
+       </NavLink>
+       <NavLink to="/all-jobs" className="navlink">
+        All Jobs
        </NavLink>
       </nav>
      );
    }
+
+export default Navbar

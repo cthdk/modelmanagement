@@ -1,7 +1,8 @@
 import { Fragment } from "react";
 import { useState } from "react";
+import Layout from "./Layout";
 
-export function Manager() {
+export function NewManager() {
   const [state, setState] = useState();
 
   function handleInputChange(event) {
@@ -42,11 +43,12 @@ export function Manager() {
         }
       };
       
-      post();
+      post(); 
   }
 
   return (
-    <Fragment>
+    <Layout>
+<Fragment>
     <h2> Create new manager </h2>
 
     <div className="react-form">
@@ -78,5 +80,6 @@ export function Manager() {
       </form>
     </div>
     </Fragment>
+    </Layout>
   )
 }
