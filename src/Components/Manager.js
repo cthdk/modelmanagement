@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { useState } from "react";
+import Layout from "./Layout";
 
 export function Manager() {
   const [state, setState] = useState();
@@ -20,23 +21,25 @@ export function Manager() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    var url = "/create-new-manager";
+    var url = "http://localhost:7181/api/Managers";
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(state),
       credentials: 'include',
       headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+        'Authorization': `Bearer  ${localStorage.getItem("token")}`,
         'Content-Type': 'application/json'
       }
     }).then(responseJson => {
+      console.log(this.response);
       this.response = responseJson;
     })
     .catch(error => alert('Something bad happened: ' + error)); // TO DO: change  
   }
 
   return (
-    <Fragment>
+    <Layout>
+<Fragment>
     <h2> Create new manager </h2>
 
     <div className="react-form">
@@ -68,5 +71,7 @@ export function Manager() {
       </form>
     </div>
     </Fragment>
+    </Layout>
+    
   )
 }

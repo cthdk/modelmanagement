@@ -1,9 +1,11 @@
 import { Fragment } from "react";
+import Layout from "./Layout";
 
 export function Job() {
     
     return (
-      <Fragment>
+      <Layout>
+          <Fragment>
         <h2> Create new job </h2>
         
         <div className="react-form">
@@ -40,5 +42,7 @@ export function Job() {
         </form>
         </div>
       </Fragment>
+      </Layout>
+      
     )
 }
