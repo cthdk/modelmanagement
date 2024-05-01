@@ -5,11 +5,12 @@ import Navbar from "./Navbar";
 export function Layout({ children }) {
   return (
     <div className="Navigationbar">
-      <Navbar />
+       {localStorage.getItem('role') == 'Manager' ? <Navbar/> : <></>}
       {children}
     </div>
   );
 }
+
 
 export default Layout
 
