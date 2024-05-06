@@ -24,8 +24,8 @@ useEffect(() => {
                 {
                     const jobsData = await response.json(); 
                     setJobsData(jobsData);
-                    console.log(jobsData)
-
+                    
+                    
                 }
                 else
                 {
@@ -39,19 +39,27 @@ useEffect(() => {
     return (
         <Layout>
             <Fragment>
-                <h2> My job information </h2>
+                <h2> Job information </h2>
 
                 {jobsData && jobsData.map((job, index) => (
-                    <div key={index}>
+                    <div key={index} style={{ border: "1px solid black", padding: "10px", marginBottom: "10px"}}>
                         <strong> Job Id:</strong> {job.jobId}<br/>
                         <strong> Customer :</strong> {job.customer}<br/>
                         <strong> Start date :</strong> {new Date(job.startDate).toLocaleDateString()}<br/>
                         <strong> Number of days :</strong> {job.days}<br/>
                         <strong> Location :</strong> {job.location}<br/>
                         <strong> Comments :</strong> {job.comments}<br/>
+
+                        <div>
+                            <label> Tilføj udgift: </label>
+                            <input name="udgift"/> 
+                            <button type="button" >
+                                Create expense
+                            </button>
+                        </div>
+
                     </div>
                 ))} 
-                
         </Fragment>
         </Layout>
     );
