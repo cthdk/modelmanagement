@@ -6,8 +6,11 @@ export function ModelNavbar() {
       <nav className="navbar">
        <NavLink to="/homepage" className="navLink"> 
         Homepage
-        console.log(hej)
        </NavLink>
+       <NavLink to="/myjobs" className="navLink"> 
+        My jobs
+       </NavLink>
+
       </nav>
      );
    }
