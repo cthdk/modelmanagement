@@ -2,8 +2,10 @@ import { Fragment } from "react";
 import { useState } from "react";
 import Layout from "./Layout";
 
+
 export function Manager() {
   const [state, setState] = useState();
+  const message = "";
 
   function handleInputChange(event) {
     const target = event.target;
@@ -20,21 +22,29 @@ export function Manager() {
 
   function handleSubmit(event) {
     event.preventDefault();
-
     var url = "http://localhost:7181/api/Managers";
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(state),
-      credentials: 'include',
-      headers: {
-        'Authorization': `Bearer  ${localStorage.getItem("token")}`,
-        'Content-Type': 'application/json'
-      }
-    }).then(responseJson => {
-      console.log(this.response);
-      this.response = responseJson;
-    })
-    .catch(error => alert('Something bad happened: ' + error)); // TO DO: change  
+      async function post() {
+        const response = await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(state),
+          credentials: 'include',
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+          },
+        })
+
+        if(response.ok)
+        {
+          message = "Manager created successfully!";
+        }
+        else 
+        {
+          message = "Failed to create manager";
+        }
+      };
+      
+      post(); 
   }
 
   return (
@@ -69,9 +79,10 @@ export function Manager() {
         </div>
 
       </form>
+
+      <label> {message} </label>
     </div>
     </Fragment>
     </Layout>
-    
   )
 }
