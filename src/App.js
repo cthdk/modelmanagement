@@ -12,7 +12,9 @@ import { Manager } from './Components/Manager';
 import { Jobs } from './Components/Jobs';
 import { Login } from './Components/Login';
 import { Home } from './Components/Home';
+import { MyJobs } from './Components/MyJobs';
 import { NotFound } from './Components/NotFound';
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
             <Route path="/model" element={<Model />} />
             <Route path="/manager" element={<Manager />} />
             <Route path="/jobs" element={<Jobs />} />
+            <Route path="/myjobs" element={<MyJobs />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
       </div>
