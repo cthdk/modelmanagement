@@ -1,3 +1,4 @@
+import { jwtDecode } from 'jwt-decode';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,6 +23,9 @@ export function Login() {
             if (response.ok) {
                 const { jwt } = await response.json();
                 localStorage.setItem('token', jwt);
+                const decoded = jwtDecode(jwt)
+                const role = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+                localStorage.setItem('role', role);
                 navigate('/homepage');
 
             } else {

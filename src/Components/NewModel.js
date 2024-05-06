@@ -1,10 +1,12 @@
 import { Fragment, useState } from "react";
-import './Model.css';
+import './NewModel.css';
+import Layout from "./Layout";
 
-export function Model() {
+export function NewModel() {
 
     return (
-        <Fragment>
+      <Layout>
+          <Fragment>
         <h2> Create new model </h2>
         
         <div className="react-form">
@@ -96,5 +98,7 @@ export function Model() {
         </form>
         </div>
       </Fragment>
+      </Layout>
+        
     )
 }

@@ -1,9 +1,11 @@
 import { Fragment } from "react";
+import Layout from "./Layout";
 
-export function Job() {
+export function NewJob() {
     
     return (
-      <Fragment>
+      <Layout>
+          <Fragment>
         <h2> Create new job </h2>
         
         <div className="react-form">
@@ -22,6 +24,7 @@ export function Job() {
               <label > Days </label>
               <input name="days" placeholder="Days" />
             </div>
+          
 
             <div className="input-div">
               <label > Location </label>
@@ -40,5 +43,7 @@ export function Job() {
         </form>
         </div>
       </Fragment>
+      </Layout>
+      
     )
 }

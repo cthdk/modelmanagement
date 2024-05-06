@@ -1,7 +1,8 @@
 import { Fragment } from "react";
 import { useState } from "react";
+import Layout from "./Layout";
 
-export function Manager() {
+export function NewManager() {
   const [state, setState] = useState();
 
   function handleInputChange(event) {
@@ -20,23 +21,34 @@ export function Manager() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    var url = "/create-new-manager";
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(state),
-      credentials: 'include',
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("token"),
-        'Content-Type': 'application/json'
-      }
-    }).then(responseJson => {
-      this.response = responseJson;
-    })
-    .catch(error => alert('Something bad happened: ' + error)); // TO DO: change  
+    var url = "http://localhost:7181/api/Managers";
+      async function post() {
+        const response = await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(state),
+          credentials: 'include',
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+          },
+        })
+
+        if(response.ok)
+        {
+          console.log("Manager created successfully!");
+        }
+        else 
+        {
+          console.error("Failed to create manager.");
+        }
+      };
+      
+      post(); 
   }
 
   return (
-    <Fragment>
+    <Layout>
+<Fragment>
     <h2> Create new manager </h2>
 
     <div className="react-form">
@@ -68,5 +80,6 @@ export function Manager() {
       </form>
     </div>
     </Fragment>
+    </Layout>
   )
 }
