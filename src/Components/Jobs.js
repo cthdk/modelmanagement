@@ -1,9 +1,10 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Layout from "./Layout";
 
 export function Jobs() {
   const [state, setState] = useState();
-  const message = "";
+  const [models, setModels] = useState([]);
+  //const [message, setMessage] = useState("");
 
   function handleInputChange(event) {
     const target = event.target;
@@ -34,16 +35,38 @@ export function Jobs() {
 
         if(response.ok)
         {
-          message = "Job created successfully!";
+          //setMessage("Job created successfully!");
         }
         else 
         {
-          message = "Failed to create job";
+          //setMessage("Failed to create job");
         }
       };
       
       post(); 
   }
+
+  useEffect(() => {
+      var url = "http://localhost:7181/api/Models";
+        async function get() {
+          const response = await fetch(url, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("token"),
+              'Content-Type': 'application/json'
+            },
+          })
+  
+          if(response.ok)
+          {
+            const data = await response.json();
+            setModels(data);
+          }
+        };
+        
+        get(); 
+  }, []);
     
     return (
       <Layout>
@@ -78,6 +101,18 @@ export function Jobs() {
               <textarea name="comments" placeholder="Comments" onChange={handleInputChange} />
             </div>
 
+            <div className="input-div">
+              <label>Model</label>
+              <select name="model">
+                <option value="">Select a Model</option>
+                {models && models.map(model => (
+                  <option key={model.efModelId} value={model.efModelId}>
+                    {model.efModelId} {model.firstName} {model.lastName}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div className="button-container">
               <button className="submit-button"> Create new job </button>
             </div>
@@ -86,6 +121,5 @@ export function Jobs() {
         </div>
       </Fragment>
       </Layout>
-      
     )
 }

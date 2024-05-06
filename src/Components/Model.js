@@ -4,7 +4,7 @@ import Layout from "./Layout";
 
 export function Model() {
   const [state, setState] = useState();
-  const message = "";
+  //const [message, setMessage] = useState("");
 
   function handleInputChange(event) {
     const target = event.target;
@@ -35,11 +35,12 @@ export function Model() {
 
         if(response.ok)
         {
-          message = "Model created successfully!";
+          console.log("Model created")
+          //setMessage("Model created successfully!");
         }
         else 
         {
-          message = "Failed to create model";
+          //setMessage("Failed to create model");
         }
       };
       
