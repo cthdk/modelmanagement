@@ -5,7 +5,7 @@ import Layout from "./Layout";
 
 export function Manager() {
   const [state, setState] = useState();
-  const message = "";
+  //const [message, setMessage] = useState("");
 
   function handleInputChange(event) {
     const target = event.target;
@@ -36,11 +36,12 @@ export function Manager() {
 
         if(response.ok)
         {
-          message = "Manager created successfully!";
+          console.log("Manager created")
+          //setMessage("Manager created successfully!");
         }
         else 
         {
-          message = "Failed to create manager";
+          //setMessage("Failed to create manager");
         }
       };
       
@@ -80,7 +81,6 @@ export function Manager() {
 
       </form>
 
-      <label> {message} </label>
     </div>
     </Fragment>
     </Layout>

@@ -3,7 +3,7 @@ import Layout from "./Layout";
 
 export function Jobs() {
   const [state, setState] = useState();
-  const message = "";
+  //const [message, setMessage] = useState("");
 
   function handleInputChange(event) {
     const target = event.target;
@@ -34,11 +34,11 @@ export function Jobs() {
 
         if(response.ok)
         {
-          message = "Job created successfully!";
+          //setMessage("Job created successfully!");
         }
         else 
         {
-          message = "Failed to create job";
+          //setMessage("Failed to create job");
         }
       };
       
@@ -86,6 +86,5 @@ export function Jobs() {
         </div>
       </Fragment>
       </Layout>
-      
     )
 }
