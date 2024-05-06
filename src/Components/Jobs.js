@@ -1,8 +1,9 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Layout from "./Layout";
 
 export function Jobs() {
   const [state, setState] = useState();
+  const [models, setModels] = useState();
   //const [message, setMessage] = useState("");
 
   function handleInputChange(event) {
@@ -44,6 +45,33 @@ export function Jobs() {
       
       post(); 
   }
+
+  useEffect(() => {
+      var url = "http://localhost:7181/api/Models";
+        async function get() {
+          const response = await fetch(url, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("token"),
+              'Content-Type': 'application/json'
+            },
+          })
+  
+          if(response.ok)
+          {
+            const data = await response.json();
+            setModels(data);
+            const firstNames = data.map(item => item.firstName);
+            const lastNames = data.map(item => item.lastName);
+            const modelId = data.map(item => item.efModelId);
+
+            console.log(firstNames, lastNames, modelId);
+          }
+        };
+        
+        get(); 
+  }, []);
     
     return (
       <Layout>
@@ -81,7 +109,7 @@ export function Jobs() {
             <div className="input-div">
               <label>Model</label>
               <select name="model">
-                <option value="pending">Pending</option>
+                <option value="">Pending</option>
                 <option value="active">Active</option>
                 <option value="completed">Completed</option>
               </select>
