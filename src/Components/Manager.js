@@ -3,7 +3,7 @@ import { useState } from "react";
 import Layout from "./Layout";
 
 
-export function NewManager() {
+export function Manager() {
   const [state, setState] = useState();
   const message = "";
 

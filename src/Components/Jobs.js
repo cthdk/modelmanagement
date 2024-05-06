@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import Layout from "./Layout";
 
-export function NewJob() {
+export function Jobs() {
     
     return (
       <Layout>

@@ -1,0 +1,15 @@
+import { NavLink } from "react-router-dom";
+import './Navbar.css';
+
+export function ModelNavbar() {
+    return (
+      <nav className="navbar">
+       <NavLink to="/homepage" className="navLink"> 
+        Homepage
+        console.log(hej)
+       </NavLink>
+      </nav>
+     );
+   }
+
+export default ModelNavbar

@@ -1,11 +1,11 @@
-import { NavLink } from "react-router-dom";
 import './Navbar.css';
-import Navbar from "./Navbar";
+import ModelNavbar from "./ModelNavbar";
+import ManagerNavbar from "./ManagerNavbar";
 
 export function Layout({ children }) {
   return (
     <div className="Navigationbar">
-       {localStorage.getItem('role') == 'Manager' ? <Navbar/> : <></>}
+       {localStorage.getItem('role') == 'Manager' ? <ManagerNavbar/> : <ModelNavbar/>}
       {children}
     </div>
   );
