@@ -3,7 +3,7 @@ import Layout from "./Layout";
 
 export function Jobs() {
   const [state, setState] = useState();
-  const [models, setModels] = useState();
+  const [models, setModels] = useState([]);
   //const [message, setMessage] = useState("");
 
   function handleInputChange(event) {
@@ -62,11 +62,6 @@ export function Jobs() {
           {
             const data = await response.json();
             setModels(data);
-            const firstNames = data.map(item => item.firstName);
-            const lastNames = data.map(item => item.lastName);
-            const modelId = data.map(item => item.efModelId);
-
-            console.log(firstNames, lastNames, modelId);
           }
         };
         
@@ -109,9 +104,12 @@ export function Jobs() {
             <div className="input-div">
               <label>Model</label>
               <select name="model">
-                <option value="">Pending</option>
-                <option value="active">Active</option>
-                <option value="completed">Completed</option>
+                <option value="">Select a Model</option>
+                {models && models.map(model => (
+                  <option key={model.efModelId} value={model.efModelId}>
+                    {model.efModelId} {model.firstName} {model.lastName}
+                  </option>
+                ))}
               </select>
             </div>
 
