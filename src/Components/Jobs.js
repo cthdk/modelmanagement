@@ -4,7 +4,49 @@ import Layout from "./Layout";
 export function Jobs() {
   const [state, setState] = useState();
   const [models, setModels] = useState([]);
+  const [jobs, setJobs] = useState([]);
   //const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    var url = "http://localhost:7181/api/Models";
+      async function getModels() {
+        const response = await fetch(url, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+          },
+        })
+
+        if(response.ok)
+        {
+          const data = await response.json();
+          setModels(data);
+        }
+      };
+
+      var url = "http://localhost:7181/api/Jobs";
+      async function getJobs() {
+        const response = await fetch(url, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+          },
+        })
+
+        if(response.ok)
+          {
+            const data = await response.json();
+            setJobs(data);
+          }
+      };
+      
+      getModels(); 
+      getJobs();
+  }, []);
 
   function handleInputChange(event) {
     const target = event.target;
@@ -46,27 +88,26 @@ export function Jobs() {
       post(); 
   }
 
-  useEffect(() => {
-      var url = "http://localhost:7181/api/Models";
-        async function get() {
-          const response = await fetch(url, {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-              'Authorization': 'Bearer ' + localStorage.getItem("token"),
-              'Content-Type': 'application/json'
-            },
-          })
-  
-          if(response.ok)
-          {
-            const data = await response.json();
-            setModels(data);
-          }
-        };
-        
-        get(); 
-  }, []);
+  function deleteModelFromJob(id) {
+    var url = `http://localhost:7181/api/Models/${id}`;
+    async function delete_() {
+      const response = await fetch(url, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        },
+      });
+
+      if(response.ok)
+      {
+        console.log("Model removed from job");
+      }
+    }
+
+    delete_();
+  }
     
     return (
       <Layout>
@@ -90,7 +131,6 @@ export function Jobs() {
               <input name="days" placeholder="Days" onChange={handleInputChange} />
             </div>
           
-
             <div className="input-div">
               <label > Location </label>
               <input name="location" placeholder="Location" onChange={handleInputChange} />
@@ -119,6 +159,7 @@ export function Jobs() {
 
         </form>
         </div>
+
       </Fragment>
       </Layout>
     )
