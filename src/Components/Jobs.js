@@ -1,39 +1,81 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import Layout from "./Layout";
 
 export function Jobs() {
+  const [state, setState] = useState();
+  const message = "";
+
+  function handleInputChange(event) {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+
+    setState(state => {
+      return {
+        ...state,
+        [name]: value
+      };
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    var url = "http://localhost:7181/api/Jobs";
+      async function post() {
+        const response = await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(state),
+          credentials: 'include',
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+          },
+        })
+
+        if(response.ok)
+        {
+          message = "Job created successfully!";
+        }
+        else 
+        {
+          message = "Failed to create job";
+        }
+      };
+      
+      post(); 
+  }
     
     return (
       <Layout>
           <Fragment>
-        <h2> Create new job </h2>
+        <h2> Jobs </h2>
         
         <div className="react-form">
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className="input-div">
               <label> Customer </label>
-              <input name="customer" placeholder="Customer" autoFocus='true' />
+              <input name="customer" placeholder="Customer" autoFocus='true' onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
               <label > Start Date </label>
-              <input name="startDate" placeholder="Start Date" type='date' />
+              <input name="startDate" placeholder="Start Date" type='date' onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
               <label > Days </label>
-              <input name="days" placeholder="Days" />
+              <input name="days" placeholder="Days" onChange={handleInputChange} />
             </div>
           
 
             <div className="input-div">
               <label > Location </label>
-              <input name="location" placeholder="Location" />
+              <input name="location" placeholder="Location" onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
               <label > Comments </label>
-              <textarea name="comments" placeholder="Comments"/>
+              <textarea name="comments" placeholder="Comments" onChange={handleInputChange} />
             </div>
 
             <div className="button-container">

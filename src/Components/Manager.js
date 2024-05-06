@@ -50,7 +50,7 @@ export function Manager() {
   return (
     <Layout>
 <Fragment>
-    <h2> Create new manager </h2>
+    <h2> Manager </h2>
 
     <div className="react-form">
       <form onSubmit={handleSubmit}>
@@ -75,7 +75,7 @@ export function Manager() {
         </div>
 
         <div className="button-container">
-              <button className="submit-button"> Manager </button>
+              <button className="submit-button"> Create new manager </button>
         </div>
 
       </form>

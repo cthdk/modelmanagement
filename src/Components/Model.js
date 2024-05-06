@@ -4,6 +4,7 @@ import Layout from "./Layout";
 
 export function Model() {
   const [state, setState] = useState();
+  const message = "";
 
   function handleInputChange(event) {
     const target = event.target;
@@ -34,11 +35,11 @@ export function Model() {
 
         if(response.ok)
         {
-          console.log("Model created successfully!");
+          message = "Model created successfully!";
         }
         else 
         {
-          console.error("Failed to create model.");
+          message = "Failed to create model";
         }
       };
       
@@ -48,7 +49,7 @@ export function Model() {
     return (
       <Layout>
           <Fragment>
-        <h2> Create new model </h2>
+        <h2> Model </h2>
         
         <div className="react-form">
         <form onSubmit={handleSubmit}>
@@ -133,7 +134,7 @@ export function Model() {
           </div>
 
           <div className="button-container">
-            <button className="submit-button"> Model </button>
+            <button className="submit-button"> Create new model </button>
           </div>
 
         </form>
