@@ -6,6 +6,47 @@ import Layout from "./Layout";
 export function MyJobs() {
 
 const [jobsData, setJobsData] = useState([]);
+const [amount, setAmount] = useState("");
+
+function handleAmountChange(event) {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+
+    setAmount(amount => {
+      return {
+        ...amount,
+        [name]: value
+      };
+    });
+  }
+
+function handleCreateExpense(event){
+    event.preventDefault();
+    var url = "http://localhost:7181/api/Expenses";
+      async function post() {
+        const response = await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({modelId: modelId, jobId: jobId, date: new Date, text: "", amount: amount}),
+          credentials: 'include',
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+          },
+        })
+
+        if(response.ok)
+        {
+          console.log("den er inde i databasen");
+        }
+        else 
+        {
+          //setMessage("Failed to create job");
+        }
+      };
+      
+      post(); 
+  }
 
 useEffect(() => {
     
@@ -24,12 +65,10 @@ useEffect(() => {
                 {
                     const jobsData = await response.json(); 
                     setJobsData(jobsData);
-                    
-                    
                 }
                 else
                 {
-                    console.log('din bare røv')
+                    console.log('Error job information')
                 }
             };
             fetchData();
@@ -50,17 +89,20 @@ useEffect(() => {
                         <strong> Location :</strong> {job.location}<br/>
                         <strong> Comments :</strong> {job.comments}<br/>
 
+                        <form onSubmit={handleCreateExpense}>
                         <div>
-                            <label> Tilføj udgift: </label>
-                            <input name="udgift"/> 
-                            <button type="button" >
+                            <label> Add amount: </label>
+                            <input name="amount" placeholder="Amount" autoFocus='true' onChange={handleAmountChange} /> 
+                            <button type="button" onClick={handleCreateExpense}>
                                 Create expense
                             </button>
                         </div>
-
+                        </form>
                     </div>
-                ))} 
-        </Fragment>
+                    
+                ))}
+                
+            </Fragment>
         </Layout>
     );
 }
