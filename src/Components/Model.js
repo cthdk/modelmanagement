@@ -1,8 +1,8 @@
 import { Fragment, useState } from "react";
-import './NewModel.css';
+import './Model.css';
 import Layout from "./Layout";
 
-export function NewModel() {
+export function Model() {
 
     return (
       <Layout>
