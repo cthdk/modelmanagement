@@ -75,7 +75,7 @@ export function NewManager() {
         </div>
 
         <div className="button-container">
-              <button className="submit-button"> Create new manager </button>
+              <button className="submit-button"> Manager </button>
         </div>
 
       </form>

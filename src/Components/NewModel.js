@@ -133,7 +133,7 @@ export function NewModel() {
           </div>
 
           <div className="button-container">
-            <button className="submit-button"> Create new model </button>
+            <button className="submit-button"> Model </button>
           </div>
 
         </form>
