@@ -44,7 +44,6 @@ export function Model() {
       
       post(); 
   }
-export function Model() {
 
     return (
       <Layout>
@@ -141,6 +140,5 @@ export function Model() {
         </div>
       </Fragment>
       </Layout>
-        
     )
 }
