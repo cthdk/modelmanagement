@@ -2,8 +2,10 @@ import { Fragment } from "react";
 import { useState } from "react";
 import Layout from "./Layout";
 
+
 export function NewManager() {
   const [state, setState] = useState();
+  const message = "";
 
   function handleInputChange(event) {
     const target = event.target;
@@ -20,7 +22,6 @@ export function NewManager() {
 
   function handleSubmit(event) {
     event.preventDefault();
-
     var url = "http://localhost:7181/api/Managers";
       async function post() {
         const response = await fetch(url, {
@@ -35,11 +36,11 @@ export function NewManager() {
 
         if(response.ok)
         {
-          console.log("Manager created successfully!");
+          message = "Manager created successfully!";
         }
         else 
         {
-          console.error("Failed to create manager.");
+          message = "Failed to create manager";
         }
       };
       
@@ -78,6 +79,8 @@ export function NewManager() {
         </div>
 
       </form>
+
+      <label> {message} </label>
     </div>
     </Fragment>
     </Layout>
