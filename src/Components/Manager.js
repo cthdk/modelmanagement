@@ -1,11 +1,32 @@
-import { Fragment } from "react";
-import { useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Layout from "./Layout";
-
+import './Manager.css';
 
 export function Manager() {
   const [state, setState] = useState();
+  const [managers, setManagers] = useState([]);
   //const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    var url = "http://localhost:7181/api/Managers";
+    async function getManagers() {
+      const response = await fetch(url, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
+          'Content-Type': 'application/json'
+        },
+      })
+  
+      if(response.ok)
+        {
+          setManagers(await response.json());
+        }
+    }
+  
+    getManagers();
+  }, []);
 
   function handleInputChange(event) {
     const target = event.target;
@@ -51,7 +72,7 @@ export function Manager() {
   return (
     <Layout>
 <Fragment>
-    <h2> Manager </h2>
+    <h2> Create a new manager </h2>
 
     <div className="react-form">
       <form onSubmit={handleSubmit}>
@@ -78,10 +99,19 @@ export function Manager() {
         <div className="button-container">
               <button className="submit-button"> Create new manager </button>
         </div>
-
       </form>
-
     </div>
+
+    <h2 className="subheader"> All managers </h2>
+      <div className="list-container">
+        {managers && managers.map(manager => (
+          <div className="items-list">
+            <label className="item-title"> {manager.firstName} {manager.lastName} </label>
+            <label className="item-description"> , {manager.email} </label>
+          </div>
+        ))}
+      </div>
+
     </Fragment>
     </Layout>
   )
