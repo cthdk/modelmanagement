@@ -78,6 +78,15 @@ export function Jobs() {
               <textarea name="comments" placeholder="Comments" onChange={handleInputChange} />
             </div>
 
+            <div className="input-div">
+              <label>Model</label>
+              <select name="model">
+                <option value="pending">Pending</option>
+                <option value="active">Active</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+
             <div className="button-container">
               <button className="submit-button"> Create new job </button>
             </div>
