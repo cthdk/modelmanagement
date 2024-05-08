@@ -90,7 +90,16 @@ export function Jobs() {
         }
       };
       
-      post(); 
+      post();
+      
+      setState({
+        customer: "",
+        startDate: "",
+        days: "",
+        location: "",
+        comments: "",
+        model: ""
+    });
   }
 
   function deleteModelFromJob(id) {
@@ -123,32 +132,32 @@ export function Jobs() {
         <form onSubmit={handleSubmit}>
             <div className="input-div">
               <label> Customer </label>
-              <input name="customer" placeholder="Customer" autoFocus='true' onChange={handleInputChange} />
+              <input name="customer" placeholder="Customer" autoFocus='true' value={state.customer} onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
               <label > Start Date </label>
-              <input name="startDate" placeholder="Start Date" type='date' onChange={handleInputChange} />
+              <input name="startDate" placeholder="Start Date" type='date' value={state.startDate} onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
               <label > Days </label>
-              <input name="days" placeholder="Days" onChange={handleInputChange} />
+              <input name="days" placeholder="Days" value={state.days} onChange={handleInputChange} />
             </div>
           
             <div className="input-div">
               <label > Location </label>
-              <input name="location" placeholder="Location" onChange={handleInputChange} />
+              <input name="location" placeholder="Location" value={state.location} onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
               <label > Comments </label>
-              <textarea name="comments" placeholder="Comments" onChange={handleInputChange} />
+              <textarea name="comments" placeholder="Comments" value={state.comments} onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
               <label>Model</label>
-              <select name="model" className="dropdown-menu">
+              <select name="model" className="dropdown-menu" value={state.model}>
                 <option value=""> Select a model</option>
                 {models && models.map(model => (
                   <option key={model.efModelId} value={model.efModelId}>
