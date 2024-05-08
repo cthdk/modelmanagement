@@ -12,7 +12,7 @@ const [expense, setExpense] = useState({
   jobId: 0,
   date: new Date(),
   text: "",
-  amount: 0
+  amount: ""
 });
 
 
@@ -56,6 +56,11 @@ function handleCreateExpense(event){
       };
       
       post(); 
+
+      setExpense({
+        text: "",
+        amount: ""
+    });
   }
 
 useEffect(() => {
@@ -102,19 +107,17 @@ useEffect(() => {
                         <form onSubmit={handleCreateExpense}>
                         <div className="handlecreateexpense">
                             <label className="amountstyle"> Add an amount to the job: </label> <br/>
-                            <label> Enter text: </label>
-                            <input name="text" placeholder="Text" autoFocus='true' onChange={handleAmountChange} /> <br/>
                             <label> Add amount: </label>
-                            <input name="amount" placeholder="Amount" autoFocus='true' onChange={handleAmountChange} /> 
+                            <input name="amount" placeholder="Amount" autoFocus='true' value={expense.amount} onChange={handleAmountChange} /> <br/>
+                            <label> Enter text: </label>
+                            <input name="text" placeholder="Text" autoFocus='true' value={expense.text} onChange={handleAmountChange} />
                             <button type="button" onClick={handleCreateExpense}>
                                 Create expense
                             </button>
                         </div>
                         </form>
                     </div>
-                    
                 ))}
-                
             </Fragment>
         </Layout>
     );

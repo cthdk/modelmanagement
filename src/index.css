@@ -13,14 +13,15 @@ code {
 }
 
 .amountstyle {
-  font-size: large;
+  font-size: medium;
+  margin-left: -0.5cm;
 }
 
 .handlecreateexpense{
   font-size: small;
-  margin-left: 1cm;
+  margin-left: 0.5cm;
   text-align: left;
-  margin-top: 1cm;
+  margin-top: 0.5cm;
 }
 
 .datamap{
@@ -34,6 +35,7 @@ code {
 }
 
 .handlecreateexpense button {
-  margin-top: 1cm;
+  margin-top: 0.5cm;
+  margin-bottom: 0.5cm;
 }
 
