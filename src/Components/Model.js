@@ -3,7 +3,24 @@ import './Model.css';
 import Layout from "./Layout";
 
 export function Model() {
-  const [state, setState] = useState();
+  const [state, setState] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNo: "",
+    adressLine1: "",
+    adressLine2: "",
+    zipCode: "",
+    city: "",
+    country: "",
+    birthdate: "",
+    nationality: "",
+    height: "",
+    shoeSize: "",
+    hairColor: "",
+    eyeColor: "",
+    comments: ""
+  });
   //const [message, setMessage] = useState("");
 
   function handleInputChange(event) {
@@ -45,6 +62,25 @@ export function Model() {
       };
       
       post(); 
+
+      setState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNo: "",
+        adressLine1: "",
+        adressLine2: "",
+        zipCode: "",
+        city: "",
+        country: "",
+      birthdate: "",
+      nationality: "",
+      height: "",
+      shoeSize: "",
+      hairColor: "",
+      eyeColor: "",
+      comments: ""
+      });
   }
 
     return (
@@ -56,82 +92,82 @@ export function Model() {
         <form onSubmit={handleSubmit}>
           <div className="input-div">
             <label> First Name </label>
-            <input name="fistName" placeholder="First Name" autoFocus='true' onChange={handleInputChange} />
+            <input name="fistName" placeholder="First Name" autoFocus='true' value={state.firstName} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Last Name </label>
-            <input name="lastName" placeholder="Last Name" onChange={handleInputChange} />
+            <input name="lastName" placeholder="Last Name" value={state.lastName} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Email </label>
-            <input name="email" placeholder="Email" type='email' onChange={handleInputChange} />
+            <input name="email" placeholder="Email" type='email' value={state.email} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Phone Number </label>
-            <input name="phoneNo" placeholder="Phone Number" type='tel' onChange={handleInputChange} />
+            <input name="phoneNo" placeholder="Phone Number" type='tel' value={state.phoneNo} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Address </label>
-            <input name="adressLine1" placeholder="Address" onChange={handleInputChange} />
+            <input name="adressLine1" placeholder="Address" value={state.adressLine1} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label/>
-            <input name="adressLine2" placeholder="Address" onChange={handleInputChange} />
+            <input name="adressLine2" placeholder="Address" value={state.adressLine2} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Zip Code</label>
-            <input name="zipCode" placeholder="Zip Code" onChange={handleInputChange} />
+            <input name="zipCode" placeholder="Zip Code" value={state.zipCode} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > City </label>
-            <input name="city" placeholder="City" onChange={handleInputChange} />
+            <input name="city" placeholder="City" value={state.city} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Country </label>
-            <input name="country" placeholder="Country" onChange={handleInputChange} />
+            <input name="country" placeholder="Country" value={state.country} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Birthdate </label>
-            <input name="birthdate" placeholder="Birthdate" type='date' onChange={handleInputChange} />
+            <input name="birthdate" placeholder="Birthdate" type='date' value={state.birthdate} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Nationality </label>
-            <input name="nationality" placeholder="Nationality" onChange={handleInputChange} />
+            <input name="nationality" placeholder="Nationality" value={state.nationality} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Height </label>
-            <input name="height" placeholder="Height" onChange={handleInputChange} />
+            <input name="height" placeholder="Height" value={state.height} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Shoe Size </label>
-            <input name="shoeSize" placeholder="Shoe Size" onChange={handleInputChange} />
+            <input name="shoeSize" placeholder="Shoe Size" value={state.shoeSize} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Hair Color </label>
-            <input name="hairColor" placeholder="Hair Color" onChange={handleInputChange} />
+            <input name="hairColor" placeholder="Hair Color" value={state.hairColor} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Eye Color </label>
-            <input name="eyeColor" placeholder="Eye Color" onChange={handleInputChange} />
+            <input name="eyeColor" placeholder="Eye Color" value={state.eyeColor} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Comments </label>
-            <textarea name="comments" placeholder="Comments" onChange={handleInputChange} />
+            <textarea name="comments" placeholder="Comments" value={state.comments} onChange={handleInputChange} />
           </div>
 
           <div className="button-container">
