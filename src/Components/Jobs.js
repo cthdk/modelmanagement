@@ -1,5 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
 import Layout from "./Layout";
+import './Jobs.css';
 
 export function Jobs() {
   const [state, setState] = useState();
@@ -24,29 +25,33 @@ export function Jobs() {
           const data = await response.json();
           setModels(data);
         }
-      };
+      }
 
-      var url = "http://localhost:7181/api/Jobs";
-      async function getJobs() {
-        const response = await fetch(url, {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("token"),
-            'Content-Type': 'application/json'
-          },
-        })
-
-        if(response.ok)
-          {
-            const data = await response.json();
-            setJobs(data);
-          }
-      };
-      
       getModels(); 
-      getJobs();
   }, []);
+
+  useEffect(() => {
+  var url = "http://localhost:7181/api/Jobs";
+  async function getJobs() {
+    const response = await fetch(url, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+      },
+    })
+
+    if(response.ok)
+      {
+        const data = await response.json();
+        setJobs(data);
+        console.log(data);
+      }
+  }
+
+  getJobs();
+}, []);
 
   function handleInputChange(event) {
     const target = event.target;
@@ -112,7 +117,7 @@ export function Jobs() {
     return (
       <Layout>
           <Fragment>
-        <h2> Jobs </h2>
+        <h2> Create a new job </h2>
         
         <div className="react-form">
         <form onSubmit={handleSubmit}>
@@ -143,8 +148,8 @@ export function Jobs() {
 
             <div className="input-div">
               <label>Model</label>
-              <select name="model">
-                <option value="">Select a Model</option>
+              <select name="model" className="dropdown-menu">
+                <option value=""> Select a model</option>
                 {models && models.map(model => (
                   <option key={model.efModelId} value={model.efModelId}>
                     {model.efModelId} {model.firstName} {model.lastName}
@@ -154,10 +159,21 @@ export function Jobs() {
             </div>
 
             <div className="button-container">
-              <button className="submit-button"> Create new job </button>
+              <button className="submit-button"> Create a new job </button>
             </div>
 
         </form>
+        </div>
+
+        <h2 className="subheader"> All jobs </h2>
+
+        <div className="jobs-container">
+          {jobs && jobs.map(job => (
+            <button className="jobs-list">
+              <label className="job-title"> {job.jobId} {job.customer} </label>
+              <label className="item-description"> , {job.location} </label>
+            </button>
+          ))}
         </div>
 
       </Fragment>
