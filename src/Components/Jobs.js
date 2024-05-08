@@ -1,17 +1,56 @@
 import { Fragment, useState, useEffect } from "react";
 import Layout from "./Layout";
+import './Jobs.css';
 
 export function Jobs() {
   const [models, setModels] = useState([]);
+  const [jobs, setJobs] = useState([]);
+  //const [message, setMessage] = useState("");
 
-  const [jobs, setJobs] = useState({
-    customer: "",
-    startDate: "",
-    days: "",
-    location: "",
-    comments: "",
-    models: [] 
-  });
+  useEffect(() => {
+    var url = "http://localhost:7181/api/Models";
+      async function getModels() {
+        const response = await fetch(url, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+          },
+        })
+
+        if(response.ok)
+        {
+          const data = await response.json();
+          setModels(data);
+        }
+      }
+
+      getModels(); 
+  }, []);
+
+  useEffect(() => {
+  var url = "http://localhost:7181/api/Jobs";
+  async function getJobs() {
+    const response = await fetch(url, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+      },
+    })
+
+    if(response.ok)
+      {
+        const data = await response.json();
+        setJobs(data);
+        console.log(data);
+      }
+  }
+
+  getJobs();
+}, []);
 
   function handleInputChange(event) {
     const target = event.target;
@@ -54,32 +93,32 @@ export function Jobs() {
     post();
   }
 
-  useEffect(() => {
-    var url = "http://localhost:7181/api/Models";
-    async function get() {
+  function deleteModelFromJob(id) {
+    var url = `http://localhost:7181/api/Models/${id}`;
+    async function delete_() {
       const response = await fetch(url, {
-        method: 'GET',
+        method: 'DELETE',
         credentials: 'include',
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem("token"),
           'Content-Type': 'application/json'
         },
-      })
+      });
 
-      if (response.ok) {
-        const models = await response.json();
-        setModels(models);
+      if(response.ok)
+      {
+        console.log("Model removed from job");
       }
-    };
+    }
 
-    get();
-  }, []);
-
-  return (
-    <Layout>
-      <Fragment>
-        <h2> Jobs </h2>
-
+    delete_();
+  }
+    
+    return (
+      <Layout>
+          <Fragment>
+        <h2> Create a new job </h2>
+        
         <div className="react-form">
           <form onSubmit={handleSubmit}>
             <div className="input-div">
@@ -96,7 +135,7 @@ export function Jobs() {
               <label > Days </label>
               <input name="days" placeholder="Days" onChange={handleInputChange} />
             </div>
-
+          
             <div className="input-div">
               <label > Location </label>
               <input name="location" placeholder="Location" onChange={handleInputChange} />
@@ -109,21 +148,34 @@ export function Jobs() {
 
             <div className="input-div">
               <label>Model</label>
-              <select name="models" multiple onChange={handleInputChange}>
-  {models && models.map(model => (
-    <option key={model.efModelId} value={model.efModelId}>
-      {model.efModelId} {model.firstName} {model.lastName}
-    </option>
-  ))}
-</select>
+              <select name="model" className="dropdown-menu">
+                <option value=""> Select a model</option>
+                {models && models.map(model => (
+                  <option key={model.efModelId} value={model.efModelId}>
+                    {model.efModelId} {model.firstName} {model.lastName}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="button-container">
-              <button className="submit-button"> Create new job </button>
+              <button className="submit-button"> Create a new job </button>
             </div>
 
           </form>
         </div>
+
+        <h2 className="subheader"> All jobs </h2>
+
+        <div className="jobs-container">
+          {jobs && jobs.map(job => (
+            <button className="jobs-list">
+              <label className="job-title"> {job.jobId} {job.customer} </label>
+              <label className="item-description"> , {job.location} </label>
+            </button>
+          ))}
+        </div>
+
       </Fragment>
     </Layout>
   )

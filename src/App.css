@@ -19,3 +19,7 @@ h2 {
   justify-content: center;
   margin-bottom: 1.5rem;
 }
+
+.explanation-label { 
+  font: 14px;
+}
