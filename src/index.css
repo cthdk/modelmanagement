@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.amountstyle {
+  font-size: large;
+}
+
+.handlecreateexpense{
+  font-size: small;
+  margin-left: 1cm;
+  text-align: left;
+  margin-top: 1cm;
+}
+
+.datamap{
+  text-align: left;
+  margin-left: 5cm;
+  margin-right: 5cm;
+}
+
+.handlecreateexpense input {
+  margin-right: 20cm;
+}
+
+.handlecreateexpense button {
+  margin-top: 1cm;
+}
+
