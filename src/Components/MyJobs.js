@@ -47,7 +47,7 @@ function handleCreateExpense(event){
 
         if(response.ok)
         {
-          console.log("den er inde i databasen");
+          console.log("Created expensive");
         }
         else 
         {

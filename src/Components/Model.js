@@ -15,8 +15,8 @@ export function Model() {
     country: "",
     birthdate: "",
     nationality: "",
-    height: "",
-    shoeSize: "",
+    height: 0,
+    shoeSize: 0,
     hairColor: "",
     eyeColor: "",
     comments: ""
@@ -39,6 +39,7 @@ export function Model() {
   function handleSubmit(event) {
     event.preventDefault();
     var url = "http://localhost:7181/api/Models";
+    console.log(state)
       async function post() {
         const response = await fetch(url, {
           method: 'POST',
@@ -75,8 +76,8 @@ export function Model() {
         country: "",
       birthdate: "",
       nationality: "",
-      height: "",
-      shoeSize: "",
+      height: 0,
+      shoeSize: 0,
       hairColor: "",
       eyeColor: "",
       comments: ""
@@ -92,7 +93,7 @@ export function Model() {
         <form onSubmit={handleSubmit}>
           <div className="input-div">
             <label> First Name </label>
-            <input name="fistName" placeholder="First Name" autoFocus='true' value={state.firstName} onChange={handleInputChange} />
+            <input name="firstName" placeholder="First Name" autoFocus='true' value={state.firstName} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
