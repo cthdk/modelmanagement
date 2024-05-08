@@ -3,7 +3,14 @@ import Layout from "./Layout";
 import './Jobs.css';
 
 export function Jobs() {
-  const [state, setState] = useState();
+  const [state, setState] = useState({
+    customer: "",
+    startDate: "",
+    days: "",
+    location: "",
+    comments: "",
+    model: ""
+  });
   const [models, setModels] = useState([]);
   const [jobs, setJobs] = useState([]);
   //const [message, setMessage] = useState("");
