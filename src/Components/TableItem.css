@@ -1,0 +1,30 @@
+.item-text {
+    font-size: 16px;
+}
+
+.table-item {
+    display: flex;
+    min-width: 35.8rem;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.table-item:first-child {
+    margin-top: 0.3rem;
+}
+
+.left-item { 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;    
+}
+
+.right-item {
+    display: flex;
+    justify-content: flex-end;    
+}
+
+.small-button {
+    min-width: 0;
+    align-self: center;
+}

@@ -122,7 +122,7 @@ export function Jobs() {
             <button key={job.jobId}
                     className="jobs-list" 
                     onClick={() => goToJobDetails(job.jobId)}>
-              <label className="job-title"> {job.jobId} {job.customer} </label>
+              <label className="job-title"> {job.jobId}: {job.customer} </label>
               <label className="item-description"> , {job.location} </label>
             </button>
           ))}

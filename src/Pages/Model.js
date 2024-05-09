@@ -1,7 +1,9 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import './Model.css';
 import Layout from "../Layout/Layout";
 import ApiRequest from "../Api/ApiRequest";
+import TableItem from "../Components/TableItem";
+import ListItem from "../Components/ListItem";
 
 export function Model() {
   const initialState = {
@@ -24,6 +26,16 @@ export function Model() {
     password: ""
   };
   const [state, setState] = useState(initialState);
+  const [models, setModels] = useState([]);
+
+  useEffect(() => {
+    async function getModels() {
+      const models = await ApiRequest(`/Models`, 'GET')
+      setModels(models);
+    }
+  
+    getModels();
+  }, [models]);
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -46,7 +58,9 @@ export function Model() {
 
     return (
       <Layout>
-          <Fragment>
+        <Fragment>
+        <div className="page-content">
+
         <h2> Model </h2>
         
         <div className="react-form">
@@ -142,6 +156,17 @@ export function Model() {
 
         </form>
         </div>
+
+    <h2 className="subheader seperator"> All models </h2>
+    
+    <div className="details-list">
+    {models && models.map(model => (
+      <ListItem label={`${model.firstName} ${model.lastName}, ${model.email}`} 
+                value={`${model.phoneNo}`}/>
+      ))} 
+    </div>
+    </div>
+
       </Fragment>
       </Layout>
     )

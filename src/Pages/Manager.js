@@ -2,6 +2,7 @@ import { Fragment, useState, useEffect } from "react";
 import Layout from "../Layout/Layout";
 import './Manager.css';
 import ApiRequest from "../Api/ApiRequest";
+import TableItem from "../Components/TableItem";
 
 export function Manager() {
   const initialState = {
@@ -78,12 +79,11 @@ export function Manager() {
     </div>
 
     <h2 className="subheader"> All managers </h2>
+
       <div className="list-container">
-        {managers && managers.map(manager => (
-          <div key={manager.efManagerId} className="items-list">
-            <label className="item-title"> {manager.firstName} {manager.lastName} </label>
-            <label className="item-description"> , {manager.email} </label>
-          </div>
+      {managers && managers.map(manager => (
+          <TableItem key={manager.efManagerId} 
+                     label={`${manager.firstName} ${manager.lastName}, ${manager.email}`} />
         ))}
       </div>
 

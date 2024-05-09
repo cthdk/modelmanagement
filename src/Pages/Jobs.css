@@ -1,3 +1,10 @@
+.page-content { 
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
 .dropdown-menu { 
     min-width: 29.35rem;
     padding: 10px;
@@ -26,7 +33,7 @@
     justify-content: flex-start;
     align-items: center;
     min-width: 40rem;
-    margin: 0.5rem;
+    margin: 0.3rem;
     border-radius: 4px;
     background-color: white; 
     border: 2px solid rgb(0, 100, 0);
@@ -43,4 +50,31 @@
 
 .item-description {
     font-size: 14px;
+}
+
+.details-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subsubheader {
+    font-weight: 400;
+}
+
+.dropdown-container { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 36rem;
+}
+
+.small-dropdown {
+    min-width: 12rem;
+}
+
+.seperator {
+    padding-top: 1rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.4);
+    min-width: 40rem;
 }
