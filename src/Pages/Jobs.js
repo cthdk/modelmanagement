@@ -2,60 +2,35 @@ import { Fragment, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import './Jobs.css';
+import ApiRequest from "../Api/ApiRequest";
 
 export function Jobs() {
-  const [state, setState] = useState({
+  const initialState = {
     customer: "",
     startDate: "",
     days: "",
     location: "",
     comments: "",
     model: ""
-  });
+  };
+  const [newJob, setNewJob] = useState(initialState);
   const [models, setModels] = useState([]);
   const [jobs, setJobs] = useState([]);
   const navigate = useNavigate();
-  //const [message, setMessage] = useState("");
 
   useEffect(() => {
-    var url = "http://localhost:7181/api/Models";
-      async function getModels() {
-        const response = await fetch(url, {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("token"),
-            'Content-Type': 'application/json'
-          },
-        })
-
-        if(response.ok)
-        {
-          const data = await response.json();
-          setModels(data);
-        }
-      }
+    async function getModels() {
+      const models = await ApiRequest(`/Models`, 'GET');
+      setModels(models);
+    }
 
       getModels(); 
   }, []);
 
   useEffect(() => {
-  var url = "http://localhost:7181/api/Jobs";
   async function getJobs() {
-    const response = await fetch(url, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("token"),
-        'Content-Type': 'application/json'
-      },
-    })
-
-    if(response.ok)
-      {
-        const data = await response.json();
-        setJobs(data);
-      }
+    const jobs = await ApiRequest(`/Jobs`, 'GET');
+    setJobs(jobs);
   }
 
     getJobs();
@@ -66,9 +41,9 @@ export function Jobs() {
     const name = target.name;
     const value = target.value;
 
-    setState(state => {
+    setNewJob(previousState => {
       return {
-        ...state,
+        ...previousState,
         [name]: value
       };
     });
@@ -76,29 +51,13 @@ export function Jobs() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    var url = "http://localhost:7181/api/Jobs";
-      async function post() {
-        const response = await fetch(url, {
-          method: 'POST',
-          body: JSON.stringify(state),
-          credentials: 'include',
-          headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("token"),
-            'Content-Type': 'application/json'
-          },
-        })
 
-        if(response.ok)
-        {
-          //setMessage("Job created successfully!");
-        }
-        else 
-        {
-          //setMessage("Failed to create job");
-        }
-      };    
+      async function postJob() {
+        await ApiRequest(`/Jobs`, 'POST', newJob);
+      }
       
-      post(); 
+      postJob(); 
+      setNewJob(initialState);
   }
 
   const goToJobDetails = (jobId) => {
@@ -114,32 +73,32 @@ export function Jobs() {
         <form onSubmit={handleSubmit}>
             <div className="input-div">
               <label> Customer </label>
-              <input name="customer" placeholder="Customer" autoFocus={true} onChange={handleInputChange} />
+              <input name="customer" placeholder="Customer" autoFocus={true} value={newJob.customer} onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
               <label > Start Date </label>
-              <input name="startDate" placeholder="Start Date" type='date' value={state.startDate} onChange={handleInputChange} />
+              <input name="startDate" placeholder="Start Date" type='date' value={newJob.startDate} onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
               <label > Days </label>
-              <input name="days" placeholder="Days" value={state.days} onChange={handleInputChange} />
+              <input name="days" placeholder="Days" value={newJob.days} onChange={handleInputChange} />
             </div>
           
             <div className="input-div">
               <label > Location </label>
-              <input name="location" placeholder="Location" value={state.location} onChange={handleInputChange} />
+              <input name="location" placeholder="Location" value={newJob.location} onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
               <label > Comments </label>
-              <textarea name="comments" placeholder="Comments" value={state.comments} onChange={handleInputChange} />
+              <textarea name="comments" placeholder="Comments" value={newJob.comments} onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
               <label>Model</label>
-              <select name="model" className="dropdown-menu" value={state.model}>
+              <select name="model" className="dropdown-menu" value={newJob.model}>
                 <option value=""> Select a model</option>
                 {models && models.map(model => (
                   <option key={model.efModelId} value={model.efModelId}>

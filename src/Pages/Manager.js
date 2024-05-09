@@ -4,12 +4,13 @@ import './Manager.css';
 import ApiRequest from "../Api/ApiRequest";
 
 export function Manager() {
-  const [newManager, setNewManager] = useState({
+  const initialState = {
     firstName: '',
     lastName: '',
     email: '',
     password: ''
-  });
+  };
+  const [newManager, setNewManager] = useState(initialState);
   const [managers, setManagers] = useState([]);
 
   useEffect(() => {
@@ -40,13 +41,7 @@ export function Manager() {
     };
       
       postManager(); 
-
-      setNewManager({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-      });
+      setNewManager(initialState);
   }
 
   return (
@@ -58,22 +53,22 @@ export function Manager() {
       <form onSubmit={handleSubmit}>
         <div className="input-div">
           <label> First Name </label>
-          <input name="firstName" placeholder="First Name" autoFocus={true} value={state.firstName} onChange={handleInputChange} />
+          <input name="firstName" placeholder="First Name" autoFocus={true} value={newManager.firstName} onChange={handleInputChange} />
         </div>
 
         <div className="input-div">
           <label> Last Name </label>
-          <input name="lastName" placeholder="Last Name" value={state.lastName} onChange={handleInputChange} />
+          <input name="lastName" placeholder="Last Name" value={newManager.lastName} onChange={handleInputChange} />
         </div>
 
         <div className="input-div">
           <label> Email </label>
-          <input name="email" placeholder="Email" type='email' value={state.email} onChange={handleInputChange} />
+          <input name="email" placeholder="Email" type='email' value={newManager.email} onChange={handleInputChange} />
         </div>
 
         <div className="input-div">
           <label> Password </label>
-          <input name="password" placeholder="Password" type="password" value={state.password} onChange={handleInputChange} />
+          <input name="password" placeholder="Password" type="password" value={newManager.password} onChange={handleInputChange} />
         </div>
 
         <div className="button-container">

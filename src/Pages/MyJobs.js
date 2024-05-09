@@ -48,9 +48,6 @@ function handleCreateExpense(event){
         {
           console.log("Created expensive");
         }
-        else 
-        {
-        }
       };
       
       post(); 

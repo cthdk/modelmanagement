@@ -12,6 +12,7 @@ export async function ApiRequest(url, method, data) {
 
     if (data) {
         options.body = JSON.stringify(data);
+        console.log(options.body);
     }
 
     try {

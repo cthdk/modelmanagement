@@ -1,16 +1,17 @@
 import { Fragment, useState } from "react";
 import './Model.css';
 import Layout from "../Layout/Layout";
+import ApiRequest from "../Api/ApiRequest";
 
 export function Model() {
-  const [state, setState] = useState({
+  const initialState = {
     firstName: "",
     lastName: "",
     email: "",
     phoneNo: "",
-    adressLine1: "",
-    adressLine2: "",
-    zipCode: "",
+    addresLine1: "",
+    addresLine2: "",
+    zip: "",
     city: "",
     country: "",
     birthdate: "",
@@ -19,66 +20,28 @@ export function Model() {
     shoeSize: 0,
     hairColor: "",
     eyeColor: "",
-    comments: ""
-  });
+    comments: "",
+    password: ""
+  };
+  const [state, setState] = useState(initialState);
 
   function handleInputChange(event) {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-
-    setState(state => {
-      return {
-        ...state,
-        [name]: value
-      };
-    });
+    const { name, value } = event.target;
+    setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    var url = "http://localhost:7181/api/Models";
-    console.log(state)
-      async function post() {
-        const response = await fetch(url, {
-          method: 'POST',
-          body: JSON.stringify(state),
-          credentials: 'include',
-          headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("token"),
-            'Content-Type': 'application/json'
-          },
-        })
 
-        if(response.ok)
-        {
-          console.log("Model created")
-        }
-        else 
-        {
-        }
-      };
+    async function postModel() {
+      ApiRequest("/Models", 'POST', state)
+    }
       
-      post(); 
-
-      setState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNo: "",
-        adressLine1: "",
-        adressLine2: "",
-        zipCode: "",
-        city: "",
-        country: "",
-      birthdate: "",
-      nationality: "",
-      height: 0,
-      shoeSize: 0,
-      hairColor: "",
-      eyeColor: "",
-      comments: ""
-      });
+    postModel(); 
+    setState(initialState);
   }
 
     return (
@@ -110,17 +73,17 @@ export function Model() {
 
           <div className="input-div">
             <label > Address </label>
-            <input name="adressLine1" placeholder="Address" value={state.adressLine1} onChange={handleInputChange} />
+            <input name="addresLine1" placeholder="Address" value={state.addresLine1} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label/>
-            <input name="adressLine2" placeholder="Address" value={state.adressLine2} onChange={handleInputChange} />
+            <input name="addresLine2" placeholder="Address" value={state.addresLine2} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Zip Code</label>
-            <input name="zipCode" placeholder="Zip Code" value={state.zipCode} onChange={handleInputChange} />
+            <input name="zip" placeholder="Zip Code" value={state.zip} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
@@ -166,6 +129,11 @@ export function Model() {
           <div className="input-div">
             <label > Comments </label>
             <textarea name="comments" placeholder="Comments" value={state.comments} onChange={handleInputChange} />
+          </div>
+
+          <div className="input-div">
+            <label> Password </label>
+            <input name="password" placeholder="Password" type="password" value={state.password} onChange={handleInputChange} />
           </div>
 
           <div className="button-container">
