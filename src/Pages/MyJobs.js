@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import Layout from "./Layout";
+import Layout from "../Layout/Layout";
 
 export function MyJobs() {
 
@@ -27,7 +27,7 @@ function handleCreateExpense(event){
       async function post() {
         const response = await fetch(url, {
           method: 'POST',
-          body: JSON.stringify({modelId: modelId, jobId: jobId, date: new Date, text: "", amount: amount}),
+          //body: JSON.stringify({modelId: modelId, jobId: jobId, date: new Date, text: "", amount: amount}),
           credentials: 'include',
           headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("token"),

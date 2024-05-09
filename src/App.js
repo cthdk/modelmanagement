@@ -7,13 +7,14 @@ import {
   
 } from "react-router-dom";
 
-import { Model } from './Components/Model';
-import { Manager } from './Components/Manager';
-import { Jobs } from './Components/Jobs';
-import { Login } from './Components/Login';
-import { Home } from './Components/Home';
-import { MyJobs } from './Components/MyJobs';
-import { NotFound } from './Components/NotFound';
+import { Model } from './Pages/Model';
+import { Manager } from './Pages/Manager';
+import { Jobs } from './Pages/Jobs';
+import { Login } from './Pages/Login';
+import { Home } from './Pages/Home';
+import { MyJobs } from './Pages/MyJobs';
+import { JobDetails } from './Pages/JobDetails';
+import { NotFound } from './Layout/NotFound';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/manager" element={<Manager />} />
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/myjobs" element={<MyJobs />} />
+            <Route path="/jobs/:jobId" element={<JobDetails />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
       </div>

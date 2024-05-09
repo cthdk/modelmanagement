@@ -1,11 +1,13 @@
 import { Fragment, useState, useEffect } from "react";
-import Layout from "./Layout";
+import { useNavigate } from "react-router-dom";
+import Layout from "../Layout/Layout";
 import './Jobs.css';
 
 export function Jobs() {
   const [state, setState] = useState();
   const [models, setModels] = useState([]);
   const [jobs, setJobs] = useState([]);
+  const navigate = useNavigate();
   //const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -46,12 +48,11 @@ export function Jobs() {
       {
         const data = await response.json();
         setJobs(data);
-        console.log(data);
       }
   }
 
-  getJobs();
-}, []);
+    getJobs();
+  }, [jobs]);
 
   function handleInputChange(event) {
     const target = event.target;
@@ -88,30 +89,13 @@ export function Jobs() {
         {
           //setMessage("Failed to create job");
         }
-      };
+      };    
       
       post(); 
   }
 
-  function deleteModelFromJob(id) {
-    var url = `http://localhost:7181/api/Models/${id}`;
-    async function delete_() {
-      const response = await fetch(url, {
-        method: 'DELETE',
-        credentials: 'include',
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem("token"),
-          'Content-Type': 'application/json'
-        },
-      });
-
-      if(response.ok)
-      {
-        console.log("Model removed from job");
-      }
-    }
-
-    delete_();
+  const goToJobDetails = (jobId) => {
+    navigate(`/jobs/${jobId}`);
   }
     
     return (
@@ -123,7 +107,7 @@ export function Jobs() {
         <form onSubmit={handleSubmit}>
             <div className="input-div">
               <label> Customer </label>
-              <input name="customer" placeholder="Customer" autoFocus='true' onChange={handleInputChange} />
+              <input name="customer" placeholder="Customer" autoFocus={true} onChange={handleInputChange} />
             </div>
 
             <div className="input-div">
@@ -169,7 +153,9 @@ export function Jobs() {
 
         <div className="jobs-container">
           {jobs && jobs.map(job => (
-            <button className="jobs-list">
+            <button key={job.jobId}
+                    className="jobs-list" 
+                    onClick={() => goToJobDetails(job.jobId)}>
               <label className="job-title"> {job.jobId} {job.customer} </label>
               <label className="item-description"> , {job.location} </label>
             </button>

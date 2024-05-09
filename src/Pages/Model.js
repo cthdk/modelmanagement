@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import './Model.css';
-import Layout from "./Layout";
+import Layout from "../Layout/Layout";
 
 export function Model() {
   const [state, setState] = useState();
@@ -56,7 +56,7 @@ export function Model() {
         <form onSubmit={handleSubmit}>
           <div className="input-div">
             <label> First Name </label>
-            <input name="fistName" placeholder="First Name" autoFocus='true' onChange={handleInputChange} />
+            <input name="fistName" placeholder="First Name" autoFocus={true} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
