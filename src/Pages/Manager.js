@@ -37,16 +37,16 @@ export function Manager() {
 
     async function postManager() {
       await ApiRequest(`/Managers`, 'POST', newManager);
+    };
+      
+      postManager(); 
+
       setNewManager({
         firstName: '',
         lastName: '',
         email: '',
         password: ''
       });
-      console.log({newManager})
-    };
-      
-      postManager(); 
   }
 
   return (
@@ -58,22 +58,22 @@ export function Manager() {
       <form onSubmit={handleSubmit}>
         <div className="input-div">
           <label> First Name </label>
-          <input name="firstName" placeholder="First Name" autoFocus={true} onChange={handleInputChange} />
+          <input name="firstName" placeholder="First Name" autoFocus={true} value={state.firstName} onChange={handleInputChange} />
         </div>
 
         <div className="input-div">
           <label> Last Name </label>
-          <input name="lastName" placeholder="Last Name" onChange={handleInputChange} />
+          <input name="lastName" placeholder="Last Name" value={state.lastName} onChange={handleInputChange} />
         </div>
 
         <div className="input-div">
           <label> Email </label>
-          <input name="email" placeholder="Email" type='email' onChange={handleInputChange} />
+          <input name="email" placeholder="Email" type='email' value={state.email} onChange={handleInputChange} />
         </div>
 
         <div className="input-div">
           <label> Password </label>
-          <input name="password" placeholder="Password" type="password" onChange={handleInputChange} />
+          <input name="password" placeholder="Password" type="password" value={state.password} onChange={handleInputChange} />
         </div>
 
         <div className="button-container">
