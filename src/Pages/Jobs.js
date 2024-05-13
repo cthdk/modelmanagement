@@ -96,18 +96,6 @@ export function Jobs() {
               <textarea name="comments" placeholder="Comments" value={newJob.comments} onChange={handleInputChange} />
             </div>
 
-            <div className="input-div">
-              <label>Model</label>
-              <select name="model" className="dropdown-menu" value={newJob.model}>
-                <option value=""> Select a model</option>
-                {models && models.map(model => (
-                  <option key={model.efModelId} value={model.efModelId}>
-                    {model.efModelId} {model.firstName} {model.lastName}
-                  </option>
-                ))}
-              </select>
-            </div>
-
             <div className="button-container">
               <button className="submit-button"> Create a new job </button>
             </div>
