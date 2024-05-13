@@ -64,16 +64,19 @@ export function Jobs() {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    let selectedModels = [];
 
-    if (target.selectedOptions && target.selectedOptions.length > 0) {
-        selectedModels = Array.from(target.selectedOptions, option => option.value);
+    if (target.multiple && target.selectedOptions) {
+        const selectedModels = Array.from(target.selectedOptions, option => option.value);
+        setState(prevState => ({
+            ...prevState,
+            model: selectedModels
+        }));
+    } else {
+        setState(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
     }
-    
-    setJobs(jobs => ({
-      ...jobs,
-      models: selectedModels
-    }));
   }
 
   function handleSubmit(event) {
@@ -112,26 +115,7 @@ export function Jobs() {
     });
   }
 
-  function deleteModelFromJob(id) {
-    var url = `http://localhost:7181/api/Models/${id}`;
-    async function delete_() {
-      const response = await fetch(url, {
-        method: 'DELETE',
-        credentials: 'include',
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem("token"),
-          'Content-Type': 'application/json'
-        },
-      });
-
-      if(response.ok)
-      {
-        console.log("Model removed from job");
-      }
-    }
-
-    delete_();
-  }
+ 
     
     return (
       <Layout>

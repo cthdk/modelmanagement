@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import Layout from "./Layout";
 import { jwtDecode } from "jwt-decode";
+import { Layout } from "../Layout/Layout";
 
 export function MyJobs() {
 
@@ -14,7 +14,6 @@ const [expense, setExpense] = useState({
   text: "",
   amount: ""
 });
-
 
 function handleAmountChange(event) {
     const target = event.target;
@@ -47,11 +46,7 @@ function handleCreateExpense(event){
 
         if(response.ok)
         {
-          console.log("den er inde i databasen");
-        }
-        else 
-        {
-          //setMessage("Failed to create job");
+          console.log("Created expensive");
         }
       };
       

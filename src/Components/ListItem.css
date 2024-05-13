@@ -1,0 +1,7 @@
+.listItem-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 35rem;
+    padding: 0.5rem;
+}

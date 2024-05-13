@@ -44,10 +44,14 @@ form {
   .submit-button {
     padding: 10px;
     border-radius: 4px;
-    border: 1px solid white;
+    border: none;
     background-color: rgb(0, 100, 0);
     color: white;
     font-size: 14px;
     min-width: 12rem;
     cursor: pointer;
   }
+
+  .details-list .listItem-container:nth-child(odd) {
+    background-color: rgba(128, 128, 128, 0.2);
+}

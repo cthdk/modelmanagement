@@ -1,0 +1,9 @@
+.list-container { 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.list-container > .table-item:nth-child(odd) {
+    background-color: rgba(128, 128, 128, 0.2);
+}

@@ -1,98 +1,73 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import './Model.css';
-import Layout from "./Layout";
+import Layout from "../Layout/Layout";
+import ApiRequest from "../Api/ApiRequest";
+import TableItem from "../Components/TableItem";
+import ListItem from "../Components/ListItem";
 
 export function Model() {
-  const [state, setState] = useState({
+  const initialState = {
     firstName: "",
     lastName: "",
     email: "",
     phoneNo: "",
-    adressLine1: "",
-    adressLine2: "",
-    zipCode: "",
+    addresLine1: "",
+    addresLine2: "",
+    zip: "",
     city: "",
     country: "",
     birthdate: "",
     nationality: "",
-    height: "",
-    shoeSize: "",
+    height: 0,
+    shoeSize: 0,
     hairColor: "",
     eyeColor: "",
-    comments: ""
-  });
-  //const [message, setMessage] = useState("");
+    comments: "",
+    password: ""
+  };
+  const [state, setState] = useState(initialState);
+  const [models, setModels] = useState([]);
+
+  useEffect(() => {
+    async function getModels() {
+      const models = await ApiRequest(`/Models`, 'GET')
+      setModels(models);
+    }
+  
+    getModels();
+  }, [models]);
 
   function handleInputChange(event) {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-
-    setState(state => {
-      return {
-        ...state,
-        [name]: value
-      };
-    });
+    const { name, value } = event.target;
+    setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    var url = "http://localhost:7181/api/Models";
-      async function post() {
-        const response = await fetch(url, {
-          method: 'POST',
-          body: JSON.stringify(state),
-          credentials: 'include',
-          headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("token"),
-            'Content-Type': 'application/json'
-          },
-        })
 
-        if(response.ok)
-        {
-          console.log("Model created")
-          //setMessage("Model created successfully!");
-        }
-        else 
-        {
-          //setMessage("Failed to create model");
-        }
-      };
+    async function postModel() {
+      ApiRequest("/Models", 'POST', state)
+    }
       
-      post(); 
-
-      setState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNo: "",
-        adressLine1: "",
-        adressLine2: "",
-        zipCode: "",
-        city: "",
-        country: "",
-      birthdate: "",
-      nationality: "",
-      height: "",
-      shoeSize: "",
-      hairColor: "",
-      eyeColor: "",
-      comments: ""
-      });
+    postModel(); 
+    setState(initialState);
   }
 
     return (
       <Layout>
-          <Fragment>
+        <Fragment>
+        <div className="page-content">
+
         <h2> Model </h2>
         
         <div className="react-form">
         <form onSubmit={handleSubmit}>
           <div className="input-div">
             <label> First Name </label>
-            <input name="fistName" placeholder="First Name" autoFocus='true' value={state.firstName} onChange={handleInputChange} />
+            <input name="firstName" placeholder="First Name" autoFocus={true} value={state.firstName} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
@@ -112,17 +87,17 @@ export function Model() {
 
           <div className="input-div">
             <label > Address </label>
-            <input name="adressLine1" placeholder="Address" value={state.adressLine1} onChange={handleInputChange} />
+            <input name="addresLine1" placeholder="Address" value={state.addresLine1} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label/>
-            <input name="adressLine2" placeholder="Address" value={state.adressLine2} onChange={handleInputChange} />
+            <input name="addresLine2" placeholder="Address" value={state.addresLine2} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
             <label > Zip Code</label>
-            <input name="zipCode" placeholder="Zip Code" value={state.zipCode} onChange={handleInputChange} />
+            <input name="zip" placeholder="Zip Code" value={state.zip} onChange={handleInputChange} />
           </div>
 
           <div className="input-div">
@@ -170,12 +145,28 @@ export function Model() {
             <textarea name="comments" placeholder="Comments" value={state.comments} onChange={handleInputChange} />
           </div>
 
+          <div className="input-div">
+            <label> Password </label>
+            <input name="password" placeholder="Password" type="password" value={state.password} onChange={handleInputChange} />
+          </div>
+
           <div className="button-container">
             <button className="submit-button"> Create new model </button>
           </div>
 
         </form>
         </div>
+
+    <h2 className="subheader seperator"> All models </h2>
+    
+    <div className="details-list">
+    {models && models.map(model => (
+      <ListItem label={`${model.firstName} ${model.lastName}, ${model.email}`} 
+                value={`${model.phoneNo}`}/>
+      ))} 
+    </div>
+    </div>
+
       </Fragment>
       </Layout>
     )
