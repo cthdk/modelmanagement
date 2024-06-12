@@ -26,6 +26,10 @@ export async function ApiRequest(url, method, data) {
             return;
         }
 
+        if (method === 'POST') {
+            return;
+        }
+
         return await response.json();
     } catch (error) {
         alert(`${method} operation failed: `, error)

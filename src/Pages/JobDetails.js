@@ -34,10 +34,9 @@ export function JobDetails () {
   };
 
   async function addModelToJob() {
-    //const selectedModel = await ApiRequest(`/Models/${selectedModelId}`, 'GET');
-
-    //await ApiRequest(`/Jobs${jobId}/model/${selectedModelId}`, 'POST', jobModel);
-  }
+    const selectedModel = await ApiRequest(`/Models/${selectedModelId}`, 'GET');
+    await ApiRequest(`/Jobs/${jobId}/model/${selectedModel.efModelId}`, 'POST')
+  };
 
   return (
     <Layout>
